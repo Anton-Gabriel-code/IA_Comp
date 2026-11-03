@@ -1,21 +1,12 @@
 ﻿import random
-import matplotlib as plt
-import numpy as np
-from prettytable import PrettyTable
 
 
-
-def fitness_function(params):
-    a, b, c = params
-    if a <= 0:
-        return -float('inf')
+def genetic_algorithm(criar_individuo, fitness, crossover, mutacao, tam_pop = 100, max_geracoes = 500, fitness_alvo = None, taxa_mutacao = 0.3, k = 3):
+    def selection(pop):
+        return max(random.sample(pop, k), key = fitness)
     
-    vertex_x = -b/(2 * a)
-    vertex_y = a * (vertex_x ** 2) + b * vertex_x + c
+    pop = [criar_individuo() for _ in range(tam_pop)]
     
-    y_left = a * (-1) ** 2 + b * (-1) + c
-    y_right = a * (1) ** 2 + b * (1) + c
-    
-    curviness = abs(y_left - vertex_y) + abs(y_right - vertex_y)
-    return -curviness
+    for geracao in range(max_geracoes):
+        
     
