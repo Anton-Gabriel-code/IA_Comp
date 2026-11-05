@@ -1,66 +1,44 @@
-
 import random
+from itertools import permutations
+
 import pandas as pd
 
-def forca_bruta_ruim(tamanho: int) -> pd.DataFrame:
-  # Sem repetir colunas
-  # O(n^n)
-  dados = []
-  for i in range(tamanho):
-        
-    possivel_solucao = "".join(
-        str(random.randint(1, 8)) for _ in range(8)
-    )
-        
-    resultado = verificar_oito_rainhas(possivel_solucao)
-    dados.append(
-         {"Possivel_Solucao": possivel_solucao, "Eh_Solucao": resultado}
-    )
+from Algoritmos.Verification import contar_conflitos, verificar_oito_rainhas
+from Algoritmos.resultado import ResultadoBusca
 
-  return pd.DataFrame(dados)
+
+def forca_bruta_ruim(tamanho: int) -> pd.DataFrame:
+    dados = []
+    for _ in range(tamanho):
+        possivel_solucao = "".join(str(random.randint(1, 8)) for _ in range(8))
+        resultado = verificar_oito_rainhas(possivel_solucao)
+        dados.append({"Possivel_Solucao": possivel_solucao, "Eh_Solucao": resultado})
+    return pd.DataFrame(dados)
+
 
 def forca_bruta_melhor(tamanho: int) -> pd.DataFrame:
-  # Sem repetir colunas e linhas
-  # O(n!)
-  dados = []
-  digitos_base = ["1", "2", "3", "4", "5", "6", "7", "8"]
+    dados = []
+    digitos_base = ["1", "2", "3", "4", "5", "6", "7", "8"]
+    for _ in range(tamanho):
+        possivel_solucao = "".join(random.sample(digitos_base, 8))
+        resultado = verificar_oito_rainhas(possivel_solucao)
+        dados.append({"Possivel_Solucao": possivel_solucao, "Eh_Solucao": resultado})
+    return pd.DataFrame(dados)
 
-  for i in range(tamanho):
-    
-    possivel_solucao = "".join(random.sample(digitos_base, 8))
 
-    resultado = verificar_oito_rainhas(possivel_solucao)
-    dados.append(
-        {"Possivel_Solucao": possivel_solucao, "Eh_Solucao": resultado}
-    )
+def resolver(n: int, limite_avaliacoes: int | None = 1_000_000) -> ResultadoBusca:
+    if n < 1:
+        raise ValueError("N deve ser maior que zero.")
+    if limite_avaliacoes is not None and limite_avaliacoes < 1:
+        raise ValueError("O limite de avaliações deve ser positivo.")
 
-  return pd.DataFrame(dados)
+    avaliacoes = 0
+    for configuracao in permutations(range(n)):
+        if limite_avaliacoes is not None and avaliacoes >= limite_avaliacoes:
+            return ResultadoBusca(None, avaliacoes, limite_atingido=True)
 
-def verificar_oito_rainhas(solucao: str) -> bool:
-    # 1. Validação de formato: deve ter exatamente 8 caracteres
-    if len(solucao) != 8:
-        return False
+        avaliacoes += 1
+        if contar_conflitos(configuracao) == 0:
+            return ResultadoBusca(list(configuracao), avaliacoes)
 
-    # 2. Validação de conteúdo: todos devem ser dígitos de '1' a '8'
-    if not all(c.isdigit() and '1' <= c <= '8' for c in solucao):
-        return False
-
-    # Converte a string para uma lista de inteiros (ajustando para índice 0 a 7)
-    lines = [int(c) - 1 for c in solucao]
-
-    # 3. Verifica ataques entre as rainhas
-    for col1 in range(8):
-        for col2 in range(col1 + 1, 8):
-            lin1 = lines[col1]
-            lin2 = lines[col2]
-
-            # Verifica se estão na mesma linha
-            if lin1 == lin2:
-                return False
-
-            # Verifica se estão na mesma diagonal
-            # (A diferença entre as linhas é igual à diferença entre as colunas)
-            if abs(lin1 - lin2) == abs(col1 - col2):
-                return False
-
-    return True
+    return ResultadoBusca(None, avaliacoes)

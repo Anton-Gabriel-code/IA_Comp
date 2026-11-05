@@ -26,3 +26,23 @@ def verificar_oito_rainhas(solucao: str) -> bool:
                 return False
 
     return True
+
+
+def contar_conflitos(tabuleiro: list[int] | tuple[int, ...]) -> int:
+    n = len(tabuleiro)
+    if n < 1 or any(type(linha) is not int or not 0 <= linha < n for linha in tabuleiro):
+        raise ValueError("O tabuleiro deve conter linhas inteiras entre 0 e N-1.")
+
+    conflitos = 0
+    for i in range(n):
+        for j in range(i + 1, n):
+            if tabuleiro[i] == tabuleiro[j] or abs(tabuleiro[i] - tabuleiro[j]) == j - i:
+                conflitos += 1
+    return conflitos
+
+
+def eh_solucao(tabuleiro: list[int] | tuple[int, ...]) -> bool:
+    try:
+        return contar_conflitos(tabuleiro) == 0
+    except (TypeError, ValueError):
+        return False
