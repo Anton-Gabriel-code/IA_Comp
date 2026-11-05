@@ -1,11 +1,13 @@
 
 import random
+from pathlib import Path
+
 import pandas as pd
 
 
 def verificar_oito_rainhas(solucao: str) -> bool:
     """Verifica se uma string de 8 caracteres resolve o problema das 8 rainhas."""
-    if len(solucao) != 8 or not solucao.isdigit():
+    if len(solucao) != 8 or not all("1" <= digito <= "8" for digito in solucao):
         return False
 
     linhas = [int(c) - 1 for c in solucao]
@@ -61,6 +63,7 @@ def salvar_dataset(df: pd.DataFrame, nome_arquivo: str = "dataset.csv"):
 
 # --- Exemplo de Uso ---
 
-TAMANHO_DATASET = 1000
-df_resultado = criar_dataset_alternado(TAMANHO_DATASET)
-salvar_dataset(df_resultado, "dataset_oito_rainhas.csv")
+if __name__ == "__main__":
+    TAMANHO_DATASET = 1000
+    df_resultado = criar_dataset_alternado(TAMANHO_DATASET)
+    salvar_dataset(df_resultado, str(Path(__file__).with_name("dataset_oito_rainhas.csv")))
