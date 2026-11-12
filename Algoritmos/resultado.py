@@ -1,5 +1,4 @@
-﻿
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 
 @dataclass
@@ -8,4 +7,5 @@ class ResultadoBusca:
     avaliacoes: int
     estados_explorados: int = 0
     geracoes: int = 0
-    historico_fitness: list[int] | None = None
+    historico_fitness: list[int] = field(default_factory=list)
+    limite_atingido: bool = False

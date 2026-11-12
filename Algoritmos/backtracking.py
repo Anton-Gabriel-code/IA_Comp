@@ -66,8 +66,14 @@ def resolver(n: int) -> ResultadoBusca:
         return False
 
     encontrado = backtrack(0)
+    solucao = None
+    if encontrado:
+        solucao = [0] * n
+        for linha, coluna in enumerate(tabuleiro):
+            solucao[coluna] = linha
+
     return ResultadoBusca(
-        tabuleiro=tabuleiro[:] if encontrado else None,
+        tabuleiro=solucao,
         avaliacoes=1 if encontrado else 0,
         estados_explorados=estados_explorados
     )
