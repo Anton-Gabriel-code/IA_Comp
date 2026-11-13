@@ -1,6 +1,24 @@
 # Problema Das Oito Rainhas
-## Comparação entre 3 algoritmos.
 
+**Autores:** Antônio Gabriel, Danilo Soares, Eudes Oliveira e Vinicius Augusto 
+**Área:** Ciência da Computação/Inteligência Artificial
+**Orientador:** Marcos Bento da Silva 
+
+## Resumo (Abstract):
+O problema das oito rainhas é um
+desafio que consiste em posicionar oito rainhas
+em um tabuleiro de xadrez com as dimensões
+8x8, de maneira que nenhuma delas possa ser
+atacada. Este trabalho tem como objetivo aplicar
+e comparar três métodos computacionais para a
+resolução desse problema: Força Bruta,
+Backtracking e Algoritmo Genético. Cada
+abordagem utiliza uma estratégia distinta para
+explorar as possibilidades de posicionamentos
+das peças tabuleiro.
+
+
+## Comparação entre 3 algoritmos.
 ### Algoritmos
 - Força Bruta (bruteforce.py)
 - Backtracking (backtracking.py)
