@@ -2,6 +2,7 @@
 
 **Autores:** Antônio Gabriel, Danilo Soares, Eudes Oliveira e Vinicius Augusto 
 **Área:** Ciência da Computação/Inteligência Artificial
+
 **Orientador:** Marcos Bento da Silva 
 
 ## Resumo (Abstract):
