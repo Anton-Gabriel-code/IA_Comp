@@ -1,6 +1,7 @@
 # Problema Das Oito Rainhas
 
-**Autores:** Antônio Gabriel, Danilo Soares, Eudes Oliveira e Vinicius Augusto 
+**Autores:** [Antônio Gabriel](https://github.com/Anton-Gabriel-code), [Danilo Soares](https://github.com/danilosmatos), [Eudes de Oliveira](https://github.com/eudesolv), [Vinicius Augusto](https://github.com/Vinicius1213)
+
 **Área:** Ciência da Computação/Inteligência Artificial
 
 **Orientador:** Marcos Bento da Silva 
