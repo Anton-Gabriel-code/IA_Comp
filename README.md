@@ -4,7 +4,7 @@
 
 **Área:** Ciência da Computação/Inteligência Artificial
 
-**Orientador:** [Marcos Vinicius da Silva Bento]((https://github.com/marcmec))
+**Orientador:** [Marcos Vinicius da Silva Bento](https://github.com/marcmec)
 
 ## Resumo (Abstract):
 O problema das oito rainhas é um
